@@ -28,7 +28,7 @@ This script is the fun part, making a number of plots comparing the mulitpliers 
 
 ## So what happened?
 
-In my opinion, the missing data did not create a large problem for PlanBsmooth. The multipliers generally follow the y=x line across stocks and terminal years. There is a hint of more extreme values associated with the missing data multipliers, which is seen by a regression line that has slope less than one and crosses the y=x line near 1.0. This means that large values estimated by PlanBsmooth with missing data may not be quite that large, and small values may not be quite that small. However, these differences are relatively small compared to the range of multipliers seen within the 10 year peels for each stock. There are some interesting differences by both stock and terminal year that are not easily explained. However, the overall conclusion I draw is that applying PlanBsmooth to Georges Bank cod in the 2021 management track is appropriate.
+In my opinion, the missing data did not create a large problem for PlanBsmooth. The multipliers generally follow the y=x line across stocks and terminal years. There is a hint of more extreme values associated with the missing data multipliers, which is seen by a regression line that has slope less than one and crosses the y=x line near 1.0. This means that large values estimated by PlanBsmooth with missing data may not be quite that large, and small values may not be quite that small. However, these differences are relatively small compared to the range of multipliers seen within the 10 year peels for each stock. There are some interesting differences by both stock and terminal year that may be due to different ranges of observations (the differences are not as noticable when the same axes are used for all stocks or terminal years). However, the overall conclusion I draw is that applying PlanBsmooth to Georges Bank cod in the 2021 management track is appropriate.
 
 ## What do you think?
 
@@ -48,6 +48,11 @@ Each stock has a different color in this plot.
 ![by stock](./plots/all_faceted.png)
 Now each stock is its own plot with different axes for each stock.
 
+![by stock](./plots/all_faceted_same_axes.png)
+Same plot as above except all stocks use the same axes.
+
 ![by termyear](./plots/all_by_termyear.png)
 Now the panels are terminal years and colors denote stocks.
 
+![by termyear](./plots/all_by_termyear_same_axes.png)
+Same plot as above except all terminal years use the same axes.

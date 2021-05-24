@@ -48,6 +48,16 @@ p4 <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
 p4
 ggsave(filename = "../plots/all_faceted.png", p4, width = 8, height = 8, units = "in")
 
+# all stocks faceted - same axes
+p4a <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
+  geom_point() +
+  geom_abline(slope = 1, linetype = "dashed") +
+  facet_wrap(~ StockID) +
+  theme_bw() +
+  theme(legend.position = "none")
+p4a
+ggsave(filename = "../plots/all_faceted_same_axes.png", p4a, width = 8, height = 8, units = "in")
+
 # grouped by terminal year
 p5 <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
   geom_point() +
@@ -57,3 +67,13 @@ p5 <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
   theme(legend.position = "none")
 p5
 ggsave(filename = "../plots/all_by_termyear.png", p5, width = 8, height = 8, units = "in")
+
+# grouped by terminal year - same axes
+p5a <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
+  geom_point() +
+  geom_abline(slope = 1, linetype = "dashed") +
+  facet_wrap(~ TermYear) +
+  theme_bw() +
+  theme(legend.position = "none")
+p5a
+ggsave(filename = "../plots/all_by_termyear_same_axes.png", p5a, width = 8, height = 8, units = "in")
