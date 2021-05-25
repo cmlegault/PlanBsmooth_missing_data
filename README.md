@@ -24,11 +24,24 @@ This script is the workhorse that applies PlanBsmooth to the orginal data and th
 
 ### 4_plot_results.R
 
-This script is the fun part, making a number of plots comparing the mulitpliers from the two situations. In the plots showing missing.data.mult vs full.data.mult, each point is a combination of stock and terminal year, with each stock having a total of 10 points (terminal years 2010 through 2019). The dashed line is the y=x line which would show exact correspondance between the two multipliers. In plots that have it, the blue line with grey shaded area is a linear regression between the two multipliers. Different colored dots denote different stocks. Suggestions for addtional plots are welcomed!
+This script is the fun part, making a number of plots comparing the mulitpliers from the two situations. In the plots showing missing.data.mult vs full.data.mult, each point is a combination of stock and terminal year, with each stock having a total of 10 points (terminal years 2010 through 2019). The dashed line is the y=x line which would show exact correspondance between the two multipliers. In plots that have it, the blue line with grey shaded area is a linear regression between the two multipliers. Different colored dots denote different stocks. 
+
+An additional plot was suggested by Paul Rago comparing the spring and fall survey correlation with the amount of difference between the multipliers using the full data and those using the missing data. Four measures of this difference were computed:
+* diff = full.data.multiplier - missing.data.multiplier
+* diff2 = diff squared
+* reldiff = diff / missing.data.multiplier
+* reldiff2 = reldiff squared
+The average of each measure was computed over the ten retrospective peels and plotted against the correlation between the spring and fall survey for that stock.
+
+Suggestions for addtional plots are welcomed!
 
 ## So what happened?
 
-In my opinion, the missing data did not create a large problem for PlanBsmooth. The multipliers generally follow the y=x line across stocks and terminal years. There is a hint of more extreme values associated with the missing data multipliers, which is seen by a regression line that has slope less than one and crosses the y=x line near 1.0. This means that large values estimated by PlanBsmooth with missing data may not be quite that large, and small values may not be quite that small. However, these differences are relatively small compared to the range of multipliers seen within the 10 year peels for each stock. There are some interesting differences by both stock and terminal year that may be due to different ranges of observations (the differences are not as noticable when the same axes are used for all stocks or terminal years). However, the overall conclusion I draw is that applying PlanBsmooth to Georges Bank cod in the 2021 management track is appropriate.
+In my opinion, the missing data did not create a large problem for PlanBsmooth. The multipliers generally follow the y=x line across stocks and terminal years. There is a hint of more extreme values associated with the missing data multipliers, which is seen by a regression line that has slope less than one and crosses the y=x line near 1.0. This means that large values estimated by PlanBsmooth with missing data may not be quite that large, and small values may not be quite that small. However, these differences are relatively small compared to the range of multipliers seen within the 10 year peels for each stock. There are some interesting differences by both stock and terminal year that may be due to different ranges of observations (the differences are not as noticable when the same axes are used for all stocks or terminal years). 
+
+The relationships between the multiplier differences and survey correlations were not strong for any of the measures. There is an indication that higher correlation between the surveys led to lower squared differences and relative squared differences.
+
+The overall conclusion I draw is that applying PlanBsmooth to Georges Bank cod in the 2021 management track is appropriate.
 
 ## What do you think?
 
@@ -56,6 +69,9 @@ Now the panels are terminal years and colors denote stocks.
 
 ![by termyear](./plots/all_by_termyear_same_axes.png)
 Same plot as above except all terminal years use the same axes.
+
+![correlation differences](./plots/corr_diffs.png)
+Relationships between four measures of differences between the multipliers with full data and those with missing data with the survey correlations between spring and fall. Each dot represents a different stock.
 
 ## Disclaimer
 

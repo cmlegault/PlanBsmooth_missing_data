@@ -20,6 +20,9 @@ df <- data.frame(StockID = character(),
                  Spring = double(),
                  Fall_lag = double())
 
+corrdf <- data.frame(StockID = character(),
+                     corr = double())
+
 istock <- 0
 for (i in 1:nfiles){
   dat <- read.csv(file.path(local.dir, list.of.files[i]))
@@ -50,11 +53,17 @@ for (i in 1:nfiles){
                            Spring = adios.r$SPRING,
                            Fall_lag = adios.r$FALL)
       df <- rbind(df, thisdf)
+      
+      thiscorrdf <- data.frame(StockID = mystockID,
+                               corr = cor(adios.r$SPRING, adios.r$FALL, use = "complete.obs"))
+      corrdf <- rbind(corrdf, thiscorrdf)
     }
   }
 }
 df
 unique(df$StockID)
+corrdf
 
 # save results
 write.csv(df, file = file.path(local.dir, "ADIOS_ALL.csv"), row.names = FALSE)
+write.csv(corrdf, file = file.path(local.dir, "correlations.csv"), row.names = FALSE)

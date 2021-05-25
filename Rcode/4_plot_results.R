@@ -4,9 +4,11 @@
 # set working directory to source file location to begin
 
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 
 df <- read.csv("../data/multipliers.csv")
+corrdf <- read.csv("../data/correlations.csv")
 
 # Only GB cod
 gbcod <- filter(df, StockID == "GBcod")
@@ -77,3 +79,24 @@ p5a <- ggplot(df, aes(x=missing.data.mult, y=full.data.mult, color=StockID)) +
   theme(legend.position = "none")
 p5a
 ggsave(filename = "../plots/all_by_termyear_same_axes.png", p5a, width = 8, height = 8, units = "in")
+
+# compute differences, squared differences, and relative of both from multipliers
+diffdf <- df %>%
+  mutate(diff = full.data.mult - missing.data.mult,
+         diff2 = diff ^ 2,
+         reldiff = diff / missing.data.mult,
+         reldiff2 = reldiff ^ 2) %>%
+  group_by(StockID) %>%
+  summarize(avgdiff = mean(diff),
+            avgdiff2 = mean(diff2),
+            avgreldiff = mean(reldiff),
+            avgreldiff2 = mean(reldiff2)) %>%
+  pivot_longer(cols = !StockID, names_to = "metric", values_to = "value") %>%
+  left_join(corrdf, by = "StockID")
+
+p6 <- ggplot(diffdf, aes(x=corr, y=value)) +
+  geom_point() +
+  facet_wrap(~ metric, scales = "free_y") +
+  theme_bw()
+p6
+ggsave(filename = "../plots/corr_diffs.png", p6, width = 6, height = 6, units = "in")
