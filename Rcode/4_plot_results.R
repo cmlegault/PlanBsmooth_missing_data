@@ -193,7 +193,7 @@ p7 <- ggplot(diffdiff, aes(x=value.x, y=value.y)) +
 p7
 ggsave(filename = "../plots/diffdiff.png", p7, width = 6, height = 6, units = "in")
 
-pdf(file="./plots/allplots.pdf")
+pdf(file="../plots/allplots.pdf")
 print(p1)
 print(p1f)
 print(p2)
